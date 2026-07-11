@@ -26,15 +26,15 @@ export const Route = createFileRoute("/shop")({
 function Shop() {
   const { data: products } = useSuspenseQuery(shopQuery);
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-      <div className="mb-10">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      <div className="mb-8 md:mb-10">
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-2">The Collection</p>
-        <h1 className="font-serif text-5xl">Shop All</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl">Shop All</h1>
       </div>
       {products.length === 0 ? (
         <p className="text-muted-foreground">No products yet.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10">
           {products.map((p) => <ProductCard key={p.id} product={p} />)}
         </div>
       )}

@@ -16,15 +16,18 @@ const productQuery = (handle: string) => queryOptions({
 });
 
 export const Route = createFileRoute("/product/$handle")({
-  head: ({ loaderData }) => ({
-    meta: loaderData ? [
-      { title: `${loaderData.title} — Elegantero` },
-      { name: "description", content: loaderData.description?.slice(0, 155) || "Elegantero" },
-      { property: "og:title", content: `${loaderData.title} — Elegantero` },
-      { property: "og:description", content: loaderData.description?.slice(0, 155) || "Elegantero" },
-      ...(loaderData.featuredImage ? [{ property: "og:image", content: loaderData.featuredImage.url }] : []),
-    ] : [{ title: "Product — Elegantero" }],
-  }),
+  head: ({ loaderData }) => {
+    const p = loaderData as { title: string; description: string; featuredImage: { url: string } | null } | undefined;
+    return {
+      meta: p ? [
+        { title: `${p.title} — Elegantero` },
+        { name: "description", content: p.description?.slice(0, 155) || "Elegantero" },
+        { property: "og:title", content: `${p.title} — Elegantero` },
+        { property: "og:description", content: p.description?.slice(0, 155) || "Elegantero" },
+        ...(p.featuredImage ? [{ property: "og:image", content: p.featuredImage.url }] : []),
+      ] : [{ title: "Product — Elegantero" }],
+    };
+  },
   loader: ({ context, params }) => context.queryClient.ensureQueryData(productQuery(params.handle)),
   component: ProductPage,
   errorComponent: ({ error }) => <div className="p-8">Failed to load: {error.message}</div>,

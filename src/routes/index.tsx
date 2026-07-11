@@ -106,20 +106,26 @@ function Home() {
 
 export function ProductCard({ product }: { product: ShopifyProduct }) {
   const price = product.priceRange.minVariantPrice;
+  const img = product.featuredImage?.url;
   return (
     <div className="group relative">
       <Link to="/product/$handle" params={{ handle: product.handle }} className="block">
-        <div className="relative aspect-[3/4] bg-muted overflow-hidden mb-4">
-          {product.featuredImage ? (
+        <div className="relative aspect-[3/4] bg-muted overflow-hidden mb-3 sm:mb-4">
+          {img ? (
             <img
-              src={product.featuredImage.url}
-              alt={product.featuredImage.altText ?? product.title}
+              src={shopifyImg(img, 600)}
+              srcSet={shopifySrcSet(img, [300, 450, 600, 900])}
+              sizes="(min-width: 1024px) 22vw, (min-width: 768px) 32vw, 48vw"
+              alt={product.featuredImage?.altText ?? product.title}
               loading="lazy"
+              decoding="async"
+              width={600}
+              height={800}
               className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
             />
           ) : <div className="w-full h-full" />}
         </div>
-        <h3 className="font-serif italic text-lg text-center">{product.title}</h3>
+        <h3 className="font-serif italic text-base sm:text-lg text-center px-1">{product.title}</h3>
         <p className="text-sm text-muted-foreground mt-1 text-center">
           {formatPrice(price.amount, price.currencyCode)}
         </p>
@@ -127,7 +133,7 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
       <button
         type="button"
         aria-label="Add to wishlist"
-        className="absolute top-3 right-3 h-9 w-9 grid place-items-center rounded-full bg-background/90 backdrop-blur border border-border hover:bg-background transition"
+        className="absolute top-2 right-2 sm:top-3 sm:right-3 h-8 w-8 sm:h-9 sm:w-9 grid place-items-center rounded-full bg-background/90 backdrop-blur border border-border hover:bg-background transition"
       >
         <Heart className="w-4 h-4" />
       </button>

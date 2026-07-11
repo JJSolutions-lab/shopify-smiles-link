@@ -12,16 +12,24 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-3 items-center h-20">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-3 items-center h-14 sm:h-20">
         <div className="flex items-center">
-          <Button variant="ghost" size="icon" aria-label="Search">
+          <Button variant="ghost" size="icon" aria-label="Search" className="h-9 w-9 sm:h-10 sm:w-10">
             <Search className="w-5 h-5" />
           </Button>
         </div>
-        <Link to="/" className="flex items-center justify-center" aria-label="Elegantero home">
-          <img src={logoAsset.url} alt="Elegantero — Elegance in Every Thread" className="h-14 md:h-16 w-auto object-contain" />
+        <Link to="/" className="flex items-center justify-center min-w-0" aria-label="Elegantero home">
+          <img
+            src={logoAsset.url}
+            alt="Elegantero — Elegance in Every Thread"
+            width={220}
+            height={64}
+            fetchPriority="high"
+            decoding="async"
+            className="h-10 sm:h-14 md:h-16 w-auto object-contain"
+          />
         </Link>
-        <div className="flex items-center justify-end gap-1">
+        <div className="flex items-center justify-end gap-0.5 sm:gap-1">
           <Button variant="ghost" size="icon" aria-label="Wishlist" className="hidden sm:inline-flex">
             <Heart className="w-5 h-5" />
           </Button>
@@ -29,10 +37,10 @@ export function Header() {
             <User className="w-4 h-4" />
             <span className="hidden sm:inline">{user ? "Account" : "Sign in"}</span>
           </Link>
-          <Button variant="ghost" size="icon" onClick={toggle} aria-label="Open cart" className="relative">
+          <Button variant="ghost" size="icon" onClick={toggle} aria-label="Open cart" className="relative h-9 w-9 sm:h-10 sm:w-10">
             <ShoppingBag className="w-5 h-5" />
             {count > 0 && (
-              <span className="absolute top-1 right-1 bg-foreground text-background text-[10px] font-medium rounded-full h-4 min-w-4 px-1 flex items-center justify-center">
+              <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-foreground text-background text-[10px] font-medium rounded-full h-4 min-w-4 px-1 flex items-center justify-center">
                 {count}
               </span>
             )}
@@ -40,7 +48,7 @@ export function Header() {
         </div>
       </div>
       <nav className="border-t border-border/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-12 h-12 text-xs uppercase tracking-[0.3em]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-6 sm:gap-12 h-10 sm:h-12 text-[11px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.3em]">
           <Link to="/shop" activeProps={{ className: "text-foreground" }} className="text-foreground/80 hover:text-foreground transition">Shop</Link>
           <a href="/shop?category=women" className="text-foreground/80 hover:text-foreground transition">Women</a>
           <a href="/shop?category=men" className="text-foreground/80 hover:text-foreground transition">Men</a>

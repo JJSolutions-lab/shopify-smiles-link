@@ -42,8 +42,8 @@ export function Header() {
       <nav className="border-t border-border/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-12 h-12 text-xs uppercase tracking-[0.3em]">
           <Link to="/shop" activeProps={{ className: "text-foreground" }} className="text-foreground/80 hover:text-foreground transition">Shop</Link>
-          <Link to="/shop" search={{ category: "women" }} className="text-foreground/80 hover:text-foreground transition">Women</Link>
-          <Link to="/shop" search={{ category: "men" }} className="text-foreground/80 hover:text-foreground transition">Men</Link>
+          <a href="/shop?category=women" className="text-foreground/80 hover:text-foreground transition">Women</a>
+          <a href="/shop?category=men" className="text-foreground/80 hover:text-foreground transition">Men</a>
         </div>
       </nav>
     </header>

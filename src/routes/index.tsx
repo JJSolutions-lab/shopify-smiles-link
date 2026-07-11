@@ -38,7 +38,9 @@ function Home() {
           alt="Elegantero summer in silk"
           width={1920}
           height={1200}
-          className="w-full h-[70vh] md:h-[85vh] object-cover"
+          fetchPriority="high"
+          decoding="async"
+          className="w-full h-[60vh] sm:h-[70vh] md:h-[85vh] object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         <div className="absolute bottom-16 left-6 md:left-16 max-w-lg text-white">

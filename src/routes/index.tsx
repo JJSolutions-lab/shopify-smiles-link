@@ -58,15 +58,15 @@ function Home() {
       </section>
 
       {/* Essentials */}
-      <section className="py-20">
-        <h2 className="font-serif italic text-4xl md:text-5xl text-center mb-12">The essentials</h2>
+      <section className="py-14 md:py-20">
+        <h2 className="font-serif italic text-3xl sm:text-4xl md:text-5xl text-center mb-8 md:mb-12">The essentials</h2>
         <div className="grid md:grid-cols-2 gap-1">
           <Link to="/shop" className="relative group overflow-hidden">
-            <img src={essentials1} alt="Silk scarves" width={1200} height={1500} loading="lazy" className="w-full h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
+            <img src={essentials1} alt="Silk scarves" width={1200} height={1500} loading="lazy" decoding="async" className="w-full h-[55vh] md:h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
             <span className="absolute bottom-8 left-8 text-white text-xs uppercase tracking-[0.3em] border-b border-white pb-1">Silks & scarves</span>
           </Link>
           <Link to="/shop" className="relative group overflow-hidden">
-            <img src={essentials2} alt="Knitwear" width={1200} height={1500} loading="lazy" className="w-full h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
+            <img src={essentials2} alt="Knitwear" width={1200} height={1500} loading="lazy" decoding="async" className="w-full h-[55vh] md:h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
             <span className="absolute bottom-8 left-8 text-white text-xs uppercase tracking-[0.3em] border-b border-white pb-1">Knitwear</span>
           </Link>
         </div>

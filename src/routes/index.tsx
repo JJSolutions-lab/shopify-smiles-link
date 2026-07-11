@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { listProducts, formatPrice, type ShopifyProduct } from "@/lib/shopify";
+import { listProducts, formatPrice, shopifyImg, shopifySrcSet, type ShopifyProduct } from "@/lib/shopify";
 import { Heart } from "lucide-react";
 import heroImg from "@/assets/hero-silk.jpg";
 import essentials1 from "@/assets/essentials-1.jpg";

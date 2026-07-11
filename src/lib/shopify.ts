@@ -82,6 +82,24 @@ export function formatPrice(amount: string | number, currencyCode = "USD") {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: currencyCode }).format(n);
 }
 
+/** Shopify CDN transform: add width param for responsive sizing. */
+export function shopifyImg(url: string | undefined | null, width: number): string {
+  if (!url) return "";
+  try {
+    const u = new URL(url);
+    u.searchParams.set("width", String(width));
+    return u.toString();
+  } catch {
+    return url;
+  }
+}
+
+/** Build a srcset for common widths from a Shopify CDN URL. */
+export function shopifySrcSet(url: string | undefined | null, widths: number[]): string {
+  if (!url) return "";
+  return widths.map((w) => `${shopifyImg(url, w)} ${w}w`).join(", ");
+}
+
 export async function createShopifyCheckout(
   lines: Array<{ merchandiseId: string; quantity: number }>,
   email?: string,

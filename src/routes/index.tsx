@@ -1,7 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { listProducts, formatPrice, type ShopifyProduct } from "@/lib/shopify";
-import logoAsset from "@/assets/elegantero-logo.png.asset.json";
+import { Heart } from "lucide-react";
+import heroImg from "@/assets/hero-silk.jpg";
+import essentials1 from "@/assets/essentials-1.jpg";
+import essentials2 from "@/assets/essentials-2.jpg";
 
 const featuredQuery = queryOptions({
   queryKey: ["products", "featured"],
@@ -11,6 +14,12 @@ const featuredQuery = queryOptions({
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(featuredQuery),
   component: Home,
+  head: () => ({
+    meta: [
+      { title: "Elegantero — Elegance in Every Thread" },
+      { name: "description", content: "Discover Elegantero — timeless, artisan-crafted essentials designed in Paris, made in Italy." },
+    ],
+  }),
   errorComponent: ({ error }) => <div className="p-8">Failed to load: {error.message}</div>,
   notFoundComponent: () => <div className="p-8">Not found</div>,
 });
@@ -19,43 +28,72 @@ function Home() {
   const { data: products } = useSuspenseQuery(featuredQuery);
   return (
     <div>
-      <section className="border-b border-border/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid gap-10 md:grid-cols-2 items-center">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-4">Elegantero · Est. 2026</p>
-            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05]">
-              Elegance in <em className="italic">every</em> thread.
-            </h1>
-            <p className="mt-6 text-muted-foreground max-w-md leading-relaxed">
-              Timeless menswear crafted with obsessive attention to fabric, cut, and finish. Made for those who know that details are everything.
-            </p>
-            <div className="mt-8 flex gap-3">
-              <Link to="/shop" className="inline-flex items-center justify-center border border-foreground bg-foreground text-background px-8 py-3 text-xs uppercase tracking-widest hover:bg-transparent hover:text-foreground transition">
-                Shop the Collection
-              </Link>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <img src={logoAsset.url} alt="Elegantero" className="max-w-full h-auto max-h-[420px]" />
-          </div>
+      {/* Hero */}
+      <section className="relative">
+        <img
+          src={heroImg}
+          alt="Elegantero summer in silk"
+          width={1920}
+          height={1200}
+          className="w-full h-[70vh] md:h-[85vh] object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        <div className="absolute bottom-16 left-6 md:left-16 max-w-lg text-white">
+          <h1 className="font-serif italic text-5xl md:text-7xl leading-[1.05]">A summer in silk</h1>
+          <p className="mt-5 text-sm md:text-base opacity-90 max-w-md">
+            The season unfolds in flowing silhouettes, sun-warmed cottons and pieces made to be lived in.
+          </p>
+          <Link
+            to="/shop"
+            className="mt-8 inline-block text-xs uppercase tracking-[0.3em] border-b border-white pb-1 hover:opacity-80 transition"
+          >
+            Discover the collection
+          </Link>
         </div>
       </section>
 
+      {/* Essentials */}
+      <section className="py-20">
+        <h2 className="font-serif italic text-4xl md:text-5xl text-center mb-12">The essentials</h2>
+        <div className="grid md:grid-cols-2 gap-1">
+          <Link to="/shop" className="relative group overflow-hidden">
+            <img src={essentials1} alt="Silk scarves" width={1200} height={1500} loading="lazy" className="w-full h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
+            <span className="absolute bottom-8 left-8 text-white text-xs uppercase tracking-[0.3em] border-b border-white pb-1">Silks & scarves</span>
+          </Link>
+          <Link to="/shop" className="relative group overflow-hidden">
+            <img src={essentials2} alt="Knitwear" width={1200} height={1500} loading="lazy" className="w-full h-[70vh] object-cover group-hover:scale-[1.02] transition duration-700" />
+            <span className="absolute bottom-8 left-8 text-white text-xs uppercase tracking-[0.3em] border-b border-white pb-1">Knitwear</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* New arrivals */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-2">Featured</p>
-            <h2 className="font-serif text-4xl">New arrivals</h2>
-          </div>
-          <Link to="/shop" className="text-xs uppercase tracking-widest hover:underline">View all →</Link>
+        <div className="text-center mb-12">
+          <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground mb-3">New arrivals</p>
+          <h2 className="font-serif italic text-4xl md:text-5xl">This season's edit</h2>
         </div>
         {products.length === 0 ? (
-          <p className="text-muted-foreground">No products yet. Add some in your Shopify admin.</p>
+          <p className="text-center text-muted-foreground">No products yet. Add some in your Shopify admin.</p>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-            {products.map((p) => <ProductCard key={p.id} product={p} />)}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
+            {products.slice(0, 8).map((p) => <ProductCard key={p.id} product={p} />)}
           </div>
         )}
+      </section>
+
+      {/* Story */}
+      <section className="bg-muted/50 py-24">
+        <div className="mx-auto max-w-2xl text-center px-4">
+          <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground mb-5">Elegantero story</p>
+          <blockquote className="font-serif italic text-4xl md:text-5xl leading-tight">
+            "Craft, refined by time."
+          </blockquote>
+          <p className="mt-8 text-muted-foreground leading-relaxed">
+            Every piece is designed in Paris and made in Italy by artisans who have spent decades
+            perfecting a single stitch. We believe in fewer, better things — pieces you will keep, wear and pass on.
+          </p>
+        </div>
       </section>
     </div>
   );
@@ -64,14 +102,30 @@ function Home() {
 export function ProductCard({ product }: { product: ShopifyProduct }) {
   const price = product.priceRange.minVariantPrice;
   return (
-    <Link to="/product/$handle" params={{ handle: product.handle }} className="group block">
-      <div className="aspect-[3/4] bg-muted overflow-hidden mb-3">
-        {product.featuredImage ? (
-          <img src={product.featuredImage.url} alt={product.featuredImage.altText ?? product.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
-        ) : <div className="w-full h-full" />}
-      </div>
-      <h3 className="text-sm font-medium">{product.title}</h3>
-      <p className="text-sm text-muted-foreground mt-0.5">{formatPrice(price.amount, price.currencyCode)}</p>
-    </Link>
+    <div className="group relative">
+      <Link to="/product/$handle" params={{ handle: product.handle }} className="block">
+        <div className="relative aspect-[3/4] bg-muted overflow-hidden mb-4">
+          {product.featuredImage ? (
+            <img
+              src={product.featuredImage.url}
+              alt={product.featuredImage.altText ?? product.title}
+              loading="lazy"
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+            />
+          ) : <div className="w-full h-full" />}
+        </div>
+        <h3 className="font-serif italic text-lg text-center">{product.title}</h3>
+        <p className="text-sm text-muted-foreground mt-1 text-center">
+          {formatPrice(price.amount, price.currencyCode)}
+        </p>
+      </Link>
+      <button
+        type="button"
+        aria-label="Add to wishlist"
+        className="absolute top-3 right-3 h-9 w-9 grid place-items-center rounded-full bg-background/90 backdrop-blur border border-border hover:bg-background transition"
+      >
+        <Heart className="w-4 h-4" />
+      </button>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/elegantero-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, User, Heart, Search } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
@@ -17,9 +18,8 @@ export function Header() {
             <Search className="w-5 h-5" />
           </Button>
         </div>
-        <Link to="/" className="flex flex-col items-center leading-none" aria-label="Elegantero home">
-          <span className="font-serif text-2xl md:text-[28px] tracking-[0.35em] pl-[0.35em]">ELEGANTERO</span>
-          <span className="text-[10px] tracking-[0.4em] text-muted-foreground mt-1">ELEGANCE IN EVERY THREAD</span>
+        <Link to="/" className="flex items-center justify-center" aria-label="Elegantero home">
+          <img src={logoAsset.url} alt="Elegantero — Elegance in Every Thread" className="h-14 md:h-16 w-auto object-contain" />
         </Link>
         <div className="flex items-center justify-end gap-1">
           <Button variant="ghost" size="icon" aria-label="Wishlist" className="hidden sm:inline-flex">

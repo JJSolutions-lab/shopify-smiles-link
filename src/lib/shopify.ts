@@ -81,3 +81,34 @@ export function formatPrice(amount: string | number, currencyCode = "USD") {
   const n = typeof amount === "string" ? parseFloat(amount) : amount;
   return new Intl.NumberFormat("en-US", { style: "currency", currency: currencyCode }).format(n);
 }
+
+export async function createShopifyCheckout(
+  lines: Array<{ merchandiseId: string; quantity: number }>,
+  email?: string,
+): Promise<string> {
+  const mutation = `
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart { id checkoutUrl }
+        userErrors { field message }
+      }
+    }
+  `;
+  const input: Record<string, unknown> = { lines };
+  if (email) input.buyerIdentity = { email };
+  const { data, errors } = await storefrontRequest<{
+    cartCreate: { cart: { id: string; checkoutUrl: string } | null; userErrors: Array<{ message: string }> };
+  }>(mutation, { input });
+  if (errors?.length) throw new Error(errors[0].message);
+  const ue = data?.cartCreate.userErrors;
+  if (ue?.length) throw new Error(ue[0].message);
+  const url = data?.cartCreate.cart?.checkoutUrl;
+  if (!url) throw new Error("Could not create checkout");
+  try {
+    const u = new URL(url);
+    u.searchParams.set("channel", "online_store");
+    return u.toString();
+  } catch {
+    return url;
+  }
+}

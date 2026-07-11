@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { getProductByHandle, formatPrice } from "@/lib/shopify";
+import { getProductByHandle, formatPrice, shopifyImg, shopifySrcSet } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useCartStore } from "@/stores/cartStore";

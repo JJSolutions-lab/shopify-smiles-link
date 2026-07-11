@@ -100,3 +100,38 @@ export const recordOrder = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { orderId: row.id };
   });
+
+export const createTestOrder = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: Omit<RecordOrderInput, "paymentIntentId">) => {
+    if (!Array.isArray(input?.items) || input.items.length === 0) throw new Error("Cart is empty");
+    if (!input.email || !/.+@.+\..+/.test(input.email)) throw new Error("Valid email required");
+    return input;
+  })
+  .handler(async ({ data, context }) => {
+    const currency = (data.items[0]?.price.currencyCode ?? "USD").toLowerCase();
+    const amount = Math.round(
+      data.items.reduce((sum, item) => sum + parseFloat(item.price.amount) * item.quantity, 0) * 100,
+    );
+
+    const { error, data: row } = await context.supabase
+      .from("orders")
+      .insert({
+        user_id: context.userId,
+        stripe_payment_intent_id: `test_${crypto.randomUUID()}`,
+        status: "paid",
+        amount_total: amount,
+        currency,
+        email: data.email,
+        shipping_name: data.shippingName ?? null,
+        shipping_address: (data.shippingAddress ?? null) as never,
+        items: data.items as never,
+        payment_method: "test_checkout",
+        updated_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
+
+    if (error) throw new Error(error.message);
+    return { orderId: row.id };
+  });

@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { getProductByHandle, formatPrice } from "@/lib/shopify";
+import { getProductByHandle, formatPrice, shopifyImg, shopifySrcSet } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useCartStore } from "@/stores/cartStore";
@@ -47,11 +47,23 @@ function ProductPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 grid gap-12 md:grid-cols-2">
-      <div className="space-y-4">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 md:py-16 grid gap-8 md:gap-12 md:grid-cols-2">
+      <div className="space-y-3 md:space-y-4">
         {product.images.edges.length > 0 ? (
           product.images.edges.map((e, i) => (
-            <img key={i} src={e.node.url} alt={e.node.altText ?? product.title} className="w-full aspect-[3/4] object-cover" />
+            <img
+              key={i}
+              src={shopifyImg(e.node.url, 900)}
+              srcSet={shopifySrcSet(e.node.url, [450, 700, 900, 1200])}
+              sizes="(min-width: 768px) 45vw, 100vw"
+              alt={e.node.altText ?? product.title}
+              loading={i === 0 ? "eager" : "lazy"}
+              fetchPriority={i === 0 ? "high" : "auto"}
+              decoding="async"
+              width={900}
+              height={1200}
+              className="w-full aspect-[3/4] object-cover"
+            />
           ))
         ) : (
           <div className="aspect-[3/4] bg-muted" />

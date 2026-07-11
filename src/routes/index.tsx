@@ -43,14 +43,14 @@ function Home() {
           className="w-full h-[60vh] sm:h-[70vh] md:h-[85vh] object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-        <div className="absolute bottom-16 left-6 md:left-16 max-w-lg text-white">
-          <h1 className="font-serif italic text-5xl md:text-7xl leading-[1.05]">A summer in silk</h1>
-          <p className="mt-5 text-sm md:text-base opacity-90 max-w-md">
+        <div className="absolute bottom-10 sm:bottom-16 left-5 sm:left-10 md:left-16 max-w-lg text-white pr-5">
+          <h1 className="font-serif italic text-4xl sm:text-5xl md:text-7xl leading-[1.05]">A summer in silk</h1>
+          <p className="mt-4 sm:mt-5 text-sm md:text-base opacity-90 max-w-md">
             The season unfolds in flowing silhouettes, sun-warmed cottons and pieces made to be lived in.
           </p>
           <Link
             to="/shop"
-            className="mt-8 inline-block text-xs uppercase tracking-[0.3em] border-b border-white pb-1 hover:opacity-80 transition"
+            className="mt-6 sm:mt-8 inline-block text-xs uppercase tracking-[0.3em] border-b border-white pb-1 hover:opacity-80 transition"
           >
             Discover the collection
           </Link>

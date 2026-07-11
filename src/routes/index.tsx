@@ -19,6 +19,9 @@ export const Route = createFileRoute("/")({
       { title: "Elegantero — Elegance in Every Thread" },
       { name: "description", content: "Discover Elegantero — timeless, artisan-crafted essentials designed in Paris, made in Italy." },
     ],
+    links: [
+      { rel: "preload", as: "image", href: heroImg, fetchpriority: "high" },
+    ],
   }),
   errorComponent: ({ error }) => <div className="p-8">Failed to load: {error.message}</div>,
   notFoundComponent: () => <div className="p-8">Not found</div>,

@@ -12,7 +12,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3 h-20 sm:h-28 md:h-32">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3 h-24 sm:h-36 md:h-40 lg:h-44">
         <div className="flex items-center">
           <Button variant="ghost" size="icon" aria-label="Search" className="h-9 w-9 sm:h-10 sm:w-10">
             <Search className="w-5 h-5" />
@@ -26,7 +26,7 @@ export function Header() {
             height={140}
             fetchPriority="high"
             decoding="async"
-            className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.02]"
+            className="h-20 sm:h-32 md:h-36 lg:h-44 w-auto object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.02]"
           />
         </Link>
 

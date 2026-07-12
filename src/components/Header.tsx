@@ -11,8 +11,8 @@ export function Header() {
   const count = totalItems();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-3 items-center h-14 sm:h-20">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3 h-20 sm:h-28 md:h-32">
         <div className="flex items-center">
           <Button variant="ghost" size="icon" aria-label="Search" className="h-9 w-9 sm:h-10 sm:w-10">
             <Search className="w-5 h-5" />
@@ -22,13 +22,14 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="Elegantero — Elegance in Every Thread"
-            width={220}
-            height={64}
+            width={480}
+            height={140}
             fetchPriority="high"
             decoding="async"
-            className="h-10 sm:h-14 md:h-16 w-auto object-contain"
+            className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.02]"
           />
         </Link>
+
         <div className="flex items-center justify-end gap-0.5 sm:gap-1">
           <Button variant="ghost" size="icon" aria-label="Wishlist" className="hidden sm:inline-flex">
             <Heart className="w-5 h-5" />

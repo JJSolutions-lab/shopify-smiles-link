@@ -12,7 +12,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3 h-20 sm:h-28 md:h-32">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-3 h-24 sm:h-36 md:h-40 lg:h-44">
         <div className="flex items-center">
           <Button variant="ghost" size="icon" aria-label="Search" className="h-9 w-9 sm:h-10 sm:w-10">
             <Search className="w-5 h-5" />

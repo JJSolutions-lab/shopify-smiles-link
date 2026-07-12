@@ -26,7 +26,7 @@ export function Header() {
             height={140}
             fetchPriority="high"
             decoding="async"
-            className="h-16 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.02]"
+            className="h-20 sm:h-32 md:h-36 lg:h-44 w-auto object-contain drop-shadow-sm transition-transform duration-500 hover:scale-[1.02]"
           />
         </Link>
 
